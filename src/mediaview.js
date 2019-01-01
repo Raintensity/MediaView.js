@@ -37,9 +37,9 @@ const MediaView={
 		dom.getElementsByTagName("h3")[0].textContent=((self.dataset.mediaView&&self.dataset.mediaView!=="[null]"&&self.dataset.mediaView!=="[default]")?self.dataset.mediaView+" - ":"")+(self.alt||self.src.split("/").pop());
 		
 		//Hide-Event
-		this.currentEvent.hide=this.hide.bind(this);
-		imgNode.parentNode.addEventListener("click",this.currentEvent.hide);
-		document.addEventListener("keydown",this.currentEvent.hide);
+		this.currentEvent.keyboardEvent=this.keyboardEvent.bind(this);
+		imgNode.parentNode.addEventListener("click",this.hide.bind(this));
+		document.addEventListener("keydown",this.currentEvent.keyboardEvent);
 
 		//Zoom-Event
 		imgNode.addEventListener("click",e=>e.stopPropagation());
@@ -85,14 +85,25 @@ const MediaView={
 			this.dPos={};
 		}
 	},
+	keyboardEvent(e){
+		if(e.keyCode===27){//Esc
+			e.preventDefault();
+			this.hide.call(this,e);
+		}else if(e.keyCode===37){//Left-arrow
+			e.preventDefault();
+			this.page.call(this,-1);
+		}else if(e.keyCode===39){//Right-arrow
+			e.preventDefault();
+			this.page.call(this,1);
+		}
+	},
 	hide(e){
-		if(e instanceof KeyboardEvent&&e.keyCode!==27)return;
 		if(document.fullscreenElement&&e.currentTarget===this.currentDOM.getElementsByTagName("img")[0].parentNode)return;
 		if(document.fullscreenElement)this.fullScreen();
 		document.body.removeChild(this.currentDOM);
-		document.removeEventListener("keydown",this.currentEvent.hide);
+		document.removeEventListener("keydown",this.currentEvent.keyboardEvent);
 		this.current=this.currentDOM=null;
-		delete this.currentEvent.hide;
+		delete this.currentEvent.keyboardEvent;
 	},
 	zoom(e){
 		let imgNode=this.currentDOM.getElementsByTagName("img")[0];
@@ -122,7 +133,7 @@ const MediaView={
 	page(n){
 		let pages=this.util.getPages(this.current);
 		let nowPage=pages.indexOf(this.current);
-		if(nowPage+n<0||pages.length<=nowPage+n)return;
+		if(nowPage+n<0||pages.length<=nowPage+n||this.current.dataset.mediaView==="[null]")return;
 		let imgNode=this.currentDOM.getElementsByTagName("img")[0];
 
 		this.current=pages[nowPage+n];
