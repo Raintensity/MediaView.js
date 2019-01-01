@@ -1,0 +1,16 @@
+{
+  "name": "mediaview",
+  "version": "1.0.0",
+  "description": "A media viewer script.",
+  "main": "./src/mediaview.js",
+  "scripts": {
+    "build": "node ./tools/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raintensity",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-es": "^3.3.9",
+    "uglifycss": "0.0.29"
+  }
+}
