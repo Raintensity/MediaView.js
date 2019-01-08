@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Change source image</title>
+<link rel="stylesheet" href="./assets/styles/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
+</head>
+<body>
+<h1>Change source image</h1>
+
+<main>
+<p><img src="./assets/images/example1.png" data-media-view-src="./assets/images/example2.png" alt="Example1 -> Example2"></p>
+<p><img src="./assets/images/example2.png" data-media-view-src="./assets/images/example3.png" alt="Example2 -> Example3"></p>
+<p><img src="./assets/images/example3.png" data-media-view-src="./assets/images/example1.png" alt="Example3 -> Example1"></p>
+
+<pre><code class="html">&lt;p&gt;&lt;img src=&quot;./assets/images/example1.png&quot; data-media-view-src=&quot;./assets/images/example2.png&quot; alt=&quot;Example1 -&gt; Example2&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example2.png&quot; data-media-view-src=&quot;./assets/images/example3.png&quot; alt=&quot;Example2 -&gt; Example3&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example3.png&quot; data-media-view-src=&quot;./assets/images/example1.png&quot; alt=&quot;Example3 -&gt; Example1&quot;&gt;&lt;/p&gt;
+</code></pre>
+</main>
+
+<footer>
+<ul>
+<li><a href="./index.html">Top</a></li>
+<li><a href="./normal.html">Normal view</a></li>
+<li><a href="./group.html">Group view</a></li>
+<li><a href="./change-source.html">change-source</a></li>
+</ul>
+<p>&copy;2019 Raintensity. Licensed under the MIT License.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script src="../src/mediaview.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

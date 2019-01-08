@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+*{
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+}
+
+a{
+	color: #46f;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+h1{
+	font-size: 20px;
+	margin: 0;
+	text-align: center;
+	background-color: #666;
+	color: #ccc;
+	padding: 5px 10px;
+	user-select: none;
+}
+
+main{
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 10px 0;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+}
+
+main h2{
+	font-size: 16px;
+	margin: 0;
+	text-align: center;
+	margin-top: 10px;
+}
+
+main p{
+	margin: 0;
+	text-align: center;
+}
+
+main p img{
+	border: 0;
+	max-width: 80%;
+}
+
+main ul{
+	width: 80%;
+	margin: 0 auto;
+}
+
+main ul~ul{
+	margin-top: 10px;
+}
+
+main li{
+	font-size: 16px;
+}
+
+main pre>code{
+	font-size: 14px;
+	width: 80%;
+	margin: 20px auto;
+}
+
+footer{
+	text-align: center;
+}
+
+footer ul{
+	margin: 0;
+	padding: 0;
+}
+
+footer ul li{
+	font-size: 13px;
+	display: inline-block;
+}
+
+footer ul li~li::before{
+	content: "-";
+	padding: 0 10px;
+}
+
+footer p{
+	font-size: 13px;
+}
+
+.flex{
+	display: flex;
+}
+
+@media screen and (max-width: 1000px){
+	main{
+		max-width: 100%;
+	}
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group</title>
+<link rel="stylesheet" href="./assets/styles/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
+</head>
+<body>
+<h1>Group view</h1>
+
+<main>
+<h2>Group1</h2>
+<div class="flex">
+<p><img src="./assets/images/example1.png" data-media-view="Group1" alt="Example1"></p>
+<p><img src="./assets/images/example2.png" data-media-view="Group1" alt="Example2"></p>
+<p><img src="./assets/images/example3.png" data-media-view="Group1" alt="Example3"></p>
+</div>
+
+<h2>Group2</h2>
+<div class="flex">
+<p><img src="./assets/images/example2.png" data-media-view="Group2" alt="Example2"></p>
+<p><img src="./assets/images/example3.png" data-media-view="Group2" alt="Example3"></p>
+<p><img src="./assets/images/example1.png" data-media-view="Group2" alt="Example1"></p>
+</div>
+
+<h2>No group</h2>
+<div class="flex">
+<p><img src="./assets/images/example3.png" data-media-view="[null]" alt="Example3"></p>
+<p><img src="./assets/images/example1.png" data-media-view="[null]" alt="Example1"></p>
+<p><img src="./assets/images/example2.png" data-media-view="[null]" alt="Example2"></p>
+</div>
+
+<pre><code class="html">&lt;!-- Group1 --&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example1.png&quot; data-media-view=&quot;Group1&quot; alt=&quot;Example1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example2.png&quot; data-media-view=&quot;Group1&quot; alt=&quot;Example2&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example3.png&quot; data-media-view=&quot;Group1&quot; alt=&quot;Example3&quot;&gt;&lt;/p&gt;
+
+&lt;!-- Group2 --&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example2.png&quot; data-media-view=&quot;Group2&quot; alt=&quot;Example2&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example3.png&quot; data-media-view=&quot;Group2&quot; alt=&quot;Example3&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example1.png&quot; data-media-view=&quot;Group2&quot; alt=&quot;Example1&quot;&gt;&lt;/p&gt;
+
+&lt;!-- No group --&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example3.png&quot; data-media-view=&quot;[null]&quot; alt=&quot;Example3&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example1.png&quot; data-media-view=&quot;[null]&quot; alt=&quot;Example1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./assets/images/example2.png&quot; data-media-view=&quot;[null]&quot; alt=&quot;Example2&quot;&gt;&lt;/p&gt;
+</code></pre>
+</main>
+
+<footer>
+<ul>
+<li><a href="./index.html">Top</a></li>
+<li><a href="./normal.html">Normal view</a></li>
+<li><a href="./group.html">Group view</a></li>
+<li><a href="./change-source.html">change-source</a></li>
+</ul>
+<p>&copy;2019 Raintensity. Licensed under the MIT License.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script src="../src/mediaview.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
