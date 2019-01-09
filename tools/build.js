@@ -27,6 +27,12 @@ let js=parsedJS.join("\r\n");
 let minified_js=uglifyJS.minify(js,minify_options);
 
 try{
+	fs.statSync(path+"/dist");
+}catch(e){
+	fs.mkdirSync(path+"/dist");
+}
+
+try{
 	fs.mkdirSync(path+"/dist/"+package.version);
 	console.log("Created: "+package.version);
 }catch(e){
