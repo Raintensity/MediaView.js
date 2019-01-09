@@ -54,6 +54,10 @@ const MediaView={
 		prevNode.addEventListener("click",this.page.bind(this,-1));
 		nextNode.addEventListener("click",this.page.bind(this,1));
 
+		//Prevent scroll
+		this.currentEvent.scrollEvent=window.scrollTo.bind(null,window.pageXOffset,window.pageYOffset);
+		window.addEventListener("scroll",this.currentEvent.scrollEvent);
+
 		//Action buttons
 		let actButtons=dom.childNodes[0].getElementsByTagName("p");
 		if(this.util.canFullScreen())actButtons[0].addEventListener("click",this.fullScreen.bind(this));
@@ -102,6 +106,7 @@ const MediaView={
 		if(document.fullscreenElement)this.fullScreen();
 		document.body.removeChild(this.currentDOM);
 		document.removeEventListener("keydown",this.currentEvent.keyboardEvent);
+		window.removeEventListener("scroll",this.currentEvent.scrollEvent);
 		this.current=this.currentDOM=null;
 		delete this.currentEvent.keyboardEvent;
 	},
