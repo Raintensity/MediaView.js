@@ -61,9 +61,9 @@ const MediaView={
 
 		//Action buttons
 		let actButtons=dom.childNodes[0].getElementsByTagName("p");
-		if(this.util.canFullScreen())actButtons[0].addEventListener("click",this.fullScreen.bind(this));
+		if(this.util.canFullScreen())actButtons[0].addEventListener("click",this.util.toggleFullScreen.bind());
 		else actButtons[0].style.display="none";
-		actButtons[1].addEventListener("click",this.download.bind(this));
+		actButtons[1].addEventListener("click",this.util.execDownload.bind(null,imgNode.src));
 		actButtons[2].addEventListener("click",this.hide.bind(this));
 
 		let pages=this.util.getPages(this.current);
@@ -104,7 +104,7 @@ const MediaView={
 	},
 	hide(e){
 		if(document.fullscreenElement&&e.currentTarget===this.currentDOM.getElementsByTagName("img")[0].parentNode)return;
-		if(document.fullscreenElement)this.fullScreen();
+		if(document.fullscreenElement)this.util.toggleFullScreen();
 		document.body.removeChild(this.currentDOM);
 		document.removeEventListener("keydown",this.currentEvent.keyboardEvent);
 		window.removeEventListener("scroll",this.currentEvent.scrollEvent);
@@ -153,29 +153,6 @@ const MediaView={
 		if(pages.length<=nowPage+n+1)this.currentDOM.childNodes[2].childNodes[1].classList.add("media-view-disabled");
 		else this.currentDOM.childNodes[2].childNodes[1].classList.remove("media-view-disabled");
 	},
-	fullScreen(){
-		if(document.fullscreenElement){
-			if(document.webkitFullScreenEnabled)document.webkitCancelFullScreen();
-			else if(document.mozFullScreenEnabled)document.mozCancelFullScreen();
-			else if(document.msFullScreenEnabled)document.msExitFullscreen();
-			else if(document.fullscreenEnabled)document.exitFullscreen();
-			else console.error("Failed");
-		}else{
-			if(document.webkitFullScreenEnabled)document.body.webkitRequestFullscreen();
-			else if(document.mozFullScreenEnabled)document.body.mozRequestFullScreen();
-			else if(document.msFullScreenEnabled)document.body.msRequestFullscreen();
-			else if(document.fullscreenEnabled)document.body.requestFullscreen();
-			else console.error("Failed");
-		}
-	},
-	download(){
-		let dummyElem=document.createElement("a");
-		dummyElem.href=this.current.dataset.mediaViewSrc||this.current.src;
-		dummyElem.setAttribute("download","");
-		dummyElem.setAttribute("target","_blank");
-		dummyElem.dispatchEvent(new MouseEvent("click"));
-		dummyElem=null;
-	},
 	util:{
 		getPages(current){
 			let groupName=current.dataset.mediaView;
@@ -183,6 +160,27 @@ const MediaView={
 		},
 		canFullScreen(){
 			return document.webkitFullScreenEnabled||document.mozFullScreenEnabled||document.msFullScreenEnabled||document.fullscreenEnabled;
+		},
+		toggleFullScreen(){
+			if(document.fullscreenElement){
+				if(document.webkitFullScreenEnabled)document.webkitCancelFullScreen();
+				else if(document.mozFullScreenEnabled)document.mozCancelFullScreen();
+				else if(document.msFullScreenEnabled)document.msExitFullscreen();
+				else if(document.fullscreenEnabled)document.exitFullscreen();
+			}else{
+				if(document.webkitFullScreenEnabled)document.body.webkitRequestFullscreen();
+				else if(document.mozFullScreenEnabled)document.body.mozRequestFullScreen();
+				else if(document.msFullScreenEnabled)document.body.msRequestFullscreen();
+				else if(document.fullscreenEnabled)document.body.requestFullscreen();
+			}
+		},
+		execDownload(url){
+			let dummyElem=document.createElement("a");
+			dummyElem.href=url;
+			dummyElem.setAttribute("download","");
+			dummyElem.setAttribute("target","_blank");
+			dummyElem.dispatchEvent(new MouseEvent("click"));
+			dummyElem=null;
 		}
 	}
 };
