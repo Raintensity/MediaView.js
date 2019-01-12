@@ -6,18 +6,20 @@
  */
 (function(window,document){
 const MediaView={
-	template:`<div id="media-view"><header><h3></h3><p>FullScreen</p><p>Download</p><p>Close</p></header><p><img draggable="false"></p><div><p>&laquo;</p><p>&raquo;</p></div></div>`,
-	css:`#media-view *{box-sizing:border-box}#media-view{all:initial;position:fixed;top:0;left:0;width:100%;height:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:rgba(0,0,0,.8);font-size:0;z-index:10000}:fullscreen #media-view{background-color:#000}#media-view>header{background-color:rgba(0,0,0,.4);color:#ccc;display:flex;position:absolute;width:100%;z-index:1}#media-view>header>*{padding:5px 15px}#media-view>header>h3{flex:1;margin:0;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#media-view>header>p{margin:0;padding-top:8px;font-size:14px;cursor:pointer}#media-view>header>p:hover{background-color:rgba(255,255,255,.1)}#media-view>header>p:active{background-color:rgba(255,255,255,.07)}#media-view>header>p:last-child{background-color:rgba(255,0,0,.2)}#media-view>header>p:last-child:hover{background-color:rgba(255,0,0,.4)}#media-view>header>p:last-child:active{background-color:rgba(255,0,0,.1)}#media-view>p{margin:0;width:100%;height:100%;padding-top:38px;overflow:hidden;display:flex;justify-content:center;align-items:center}#media-view>p>img{border:0;width:auto;height:auto;max-width:100%;max-height:100%;cursor:zoom-in;background-color:transparent;background-image:linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.25) 75%,rgba(0,0,0,.25)),linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.25) 75%,rgba(0,0,0,.25));background-position:0 0,10px 10px;background-size:20px 20px}#media-view>p.media-view-zoom{justify-content:flex-start;align-items:flex-start;position:relative}#media-view>p.media-view-zoom.media-view-zoom-x{justify-content:center}#media-view>p.media-view-zoom.media-view-zoom-y{align-items:center}#media-view>p.media-view-zoom>img{max-width:unset;max-height:unset;cursor:zoom-out;position:absolute}#media-view>div>p{margin:0;padding:5px;z-index:0;display:flex;align-items:center;font-size:35px;height:calc(100% - 38px);position:absolute;color:rgba(255,255,255,.5);bottom:0;font-weight:bold;background-color:rgba(255,255,255,.05);cursor:pointer}#media-view>div>p:hover{background-color:rgba(255,255,255,.2)}#media-view>div>p:active{background-color:rgba(255,255,255,.1)}#media-view>div>p:first-child{left:0}#media-view>div>p:last-child{right:0}#media-view>div>p.media-view-disabled{cursor:default;background-color:initial;color:rgba(255,255,255,.2)}#media-view>div>p.media-view-disabled:hover{background-color:initial}#media-view>div>p.media-view-disabled:active{background-color:initial}#media-view>p.media-view-zoom+div>p.media-view-disabled{display:none}@media screen and (max-width:480px){#media-view>header>p:not(:last-child){display:none}}`,
+	template:`<div id="media-view"><header><h3></h3><p>FullScreen</p><p>Download</p><p>Close</p></header><p><img src="" draggable="false"><progress max="100" value="0"></progress></p><div><p>&laquo;</p><p>&raquo;</p></div></div>`,
+	css:`#media-view *{box-sizing:border-box}#media-view{all:initial;position:fixed;top:0;left:0;width:100%;height:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:rgba(0,0,0,.8);font-size:0;z-index:10000}:fullscreen #media-view{background-color:#000}#media-view>header{background-color:rgba(0,0,0,.4);color:#ccc;display:flex;position:absolute;width:100%;z-index:1}#media-view>header>*{padding:5px 15px}#media-view>header>h3{flex:1;margin:0;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#media-view>header>p{margin:0;padding-top:8px;font-size:14px;cursor:pointer}#media-view.media-view-loading>header>p:not(:last-child){pointer-events:none;color:#666}#media-view>header>p:hover{background-color:rgba(255,255,255,.1)}#media-view>header>p:active{background-color:rgba(255,255,255,.07)}#media-view>header>p:last-child{background-color:rgba(255,0,0,.2)}#media-view>header>p:last-child:hover{background-color:rgba(255,0,0,.4)}#media-view>header>p:last-child:active{background-color:rgba(255,0,0,.1)}#media-view>p{margin:0;width:100%;height:100%;padding-top:38px;overflow:hidden;display:flex;justify-content:center;align-items:center}#media-view>p>img{border:0;width:auto;height:auto;max-width:100%;max-height:100%;cursor:zoom-in;background-color:transparent;background-image:linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.25) 75%,rgba(0,0,0,.25)),linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.25) 75%,rgba(0,0,0,.25));background-position:0 0,10px 10px;background-size:20px 20px}#media-view>p.media-view-zoom{justify-content:flex-start;align-items:flex-start;position:relative}#media-view>p.media-view-zoom.media-view-zoom-x{justify-content:center}#media-view>p.media-view-zoom.media-view-zoom-y{align-items:center}#media-view>p.media-view-zoom>img{max-width:unset;max-height:unset;cursor:zoom-out;position:absolute}#media-view>p>progress{display:none;width:80%;height:8px;-webkit-appearance:none}#media-view>p>img[src='']{display:none}#media-view>p>img[src='']+progress{display:inline}#media-view>div>p{margin:0;padding:5px;z-index:0;display:flex;align-items:center;font-size:35px;height:calc(100% - 38px);position:absolute;color:rgba(255,255,255,.5);bottom:0;font-weight:bold;background-color:rgba(255,255,255,.05);cursor:pointer}#media-view>div>p:hover{background-color:rgba(255,255,255,.2)}#media-view>div>p:active{background-color:rgba(255,255,255,.1)}#media-view>div>p:first-child{left:0}#media-view>div>p:last-child{right:0}#media-view>div>p.media-view-disabled{cursor:default;background-color:initial;color:rgba(255,255,255,.2)}#media-view>div>p.media-view-disabled:hover{background-color:initial}#media-view>div>p.media-view-disabled:active{background-color:initial}#media-view>p.media-view-zoom+div>p.media-view-disabled{display:none}@media screen and (max-width:480px){#media-view>header>p:not(:last-child){display:none}}`,
 	current:null,
 	currentDOM:null,
 	currentEvent:{},
+	currentXHR:null,
+	currentObject:null,
 	dPos:{},
 	init(){
 		let cssNode=document.createElement("style");
 		cssNode.appendChild(document.createTextNode(this.css));
 		document.head.appendChild(cssNode);
 
-		let node=document.querySelectorAll("img,[data-media-view]");
+		let node=document.querySelectorAll("img[src],[data-media-view]");
 		for(let i=0;i<node.length;i++){
 			let val=node[i].dataset.mediaView?node[i].dataset.mediaView.toLowerCase():null;
 			if(!val||val==="")node[i].dataset.mediaView="[default]";
@@ -34,7 +36,8 @@ const MediaView={
 		let imgNode=dom.getElementsByTagName("img")[0];
 
 		//Set image info
-		imgNode.src=self.dataset.mediaViewSrc||self.src;
+		if(self.dataset.mediaViewSrc)this.load(self.dataset.mediaViewSrc);
+		else imgNode.src=self.src;
 		dom.getElementsByTagName("h3")[0].textContent=((self.dataset.mediaView&&self.dataset.mediaView!=="[null]"&&self.dataset.mediaView!=="[default]")?self.dataset.mediaView+" - ":"")+(self.alt||self.src.split("/").pop());
 		
 		//Hide-Event
@@ -77,6 +80,31 @@ const MediaView={
 		//Add to body element
 		document.body.appendChild(dom);
 	},
+	load(url){
+		if(this.currentXHR)this.currentXHR.abort();
+		if(this.currentObject){
+			URL.revokeObjectURL(this.currentObject);
+			this.currentObject=null;
+		}
+		this.currentDOM.classList.add("media-view-loading");
+		this.currentXHR=new XMLHttpRequest();
+		this.currentXHR.open("GET",url,true);
+		this.currentXHR.responseType="blob";
+		this.currentXHR.addEventListener("load",this.loaded.bind(this));
+		this.currentXHR.addEventListener("progress",this.loading.bind(this));
+		this.currentXHR.addEventListener("error",this.hide.bind(this));
+		this.currentXHR.send();
+	},
+	loading(e){
+		this.currentDOM.getElementsByTagName("progress")[0].value=~~(e.loaded/e.total*100);
+	},
+	loaded(e){
+		this.currentObject=URL.createObjectURL(this.currentXHR.response);
+		this.currentDOM.getElementsByTagName("img")[0].src=this.currentObject;
+		this.currentDOM.getElementsByTagName("progress")[0].value=0;
+		this.currentXHR=null;
+		this.currentDOM.classList.remove("media-view-loading");
+	},
 	mouseEvent(e){
 		e.stopPropagation();
 		if(e.type==="mousemove"){
@@ -105,10 +133,12 @@ const MediaView={
 	hide(e){
 		if(document.fullscreenElement&&e.currentTarget===this.currentDOM.getElementsByTagName("img")[0].parentNode)return;
 		if(document.fullscreenElement)this.util.toggleFullScreen();
+		if(this.currentXHR)this.currentXHR.abort();
+		if(this.currentObject)URL.revokeObjectURL(this.currentObject);
 		document.body.removeChild(this.currentDOM);
 		document.removeEventListener("keydown",this.currentEvent.keyboardEvent);
 		window.removeEventListener("scroll",this.currentEvent.scrollEvent);
-		this.current=this.currentDOM=null;
+		this.current=this.currentDOM=this.currentXHR=this.currentObject=null;
 		delete this.currentEvent.keyboardEvent;
 	},
 	zoom(e){
@@ -143,7 +173,9 @@ const MediaView={
 		let imgNode=this.currentDOM.getElementsByTagName("img")[0];
 
 		this.current=pages[nowPage+n];
-		imgNode.src=this.current.dataset.mediaViewSrc||this.current.src;
+		imgNode.src="";
+		if(this.current.dataset.mediaViewSrc)this.load(this.current.dataset.mediaViewSrc);
+		else imgNode.src=this.current.src;
 		this.currentDOM.getElementsByTagName("h3")[0].textContent=((this.current.dataset.mediaView&&this.current.dataset.mediaView!=="[null]"&&this.current.dataset.mediaView!=="[default]")?this.current.dataset.mediaView+" - ":"")+(this.current.alt||this.current.src.split("/").pop());
 		imgNode.parentNode.classList.remove("media-view-zoom");
 

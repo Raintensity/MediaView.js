@@ -51,6 +51,11 @@
 	cursor: pointer;
 }
 
+#media-view.media-view-loading>header>p:not(:last-child) {
+	pointer-events: none;
+	color: #666;
+}
+
 #media-view>header>p:hover {
 	background-color: rgba(255, 255, 255, .1);
 }
@@ -114,6 +119,21 @@
 	max-height: unset;
 	cursor: zoom-out;
 	position:absolute;
+}
+
+#media-view>p>progress {
+	display: none;
+	width: 80%;
+	height: 8px;
+	-webkit-appearance: none;
+}
+
+#media-view>p>img[src=''] {
+	display: none;
+}
+
+#media-view>p>img[src='']+progress {
+	display: inline;
 }
 
 #media-view>div>p {
