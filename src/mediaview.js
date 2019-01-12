@@ -92,7 +92,7 @@ const MediaView={
 		this.currentXHR.responseType="blob";
 		this.currentXHR.addEventListener("load",this.loaded.bind(this));
 		this.currentXHR.addEventListener("progress",this.loading.bind(this));
-		this.currentXHR.addEventListener("error",this.hide.bind(this));
+		this.currentXHR.addEventListener("error",this.failed.bind(this));
 		this.currentXHR.send();
 	},
 	loading(e){
@@ -104,6 +104,10 @@ const MediaView={
 		this.currentDOM.getElementsByTagName("progress")[0].value=0;
 		this.currentXHR=null;
 		this.currentDOM.classList.remove("media-view-loading");
+	},
+	failed(){
+		this.hide();
+		this.error.show("Failed load image.");
 	},
 	mouseEvent(e){
 		e.stopPropagation();
@@ -184,6 +188,28 @@ const MediaView={
 		else this.currentDOM.childNodes[2].childNodes[0].classList.remove("media-view-disabled");
 		if(pages.length<=nowPage+n+1)this.currentDOM.childNodes[2].childNodes[1].classList.add("media-view-disabled");
 		else this.currentDOM.childNodes[2].childNodes[1].classList.remove("media-view-disabled");
+	},
+	error:{
+		current:[],
+		show(msg){
+			let elem=document.createElement("p");
+			elem.setAttribute("style","all:initial;position:fixed;top:0;left:0;width:100%;text-align:center;z-index:10000;font-size:16px;padding:5px 10px;background-color:rgba(255,220,220,.8);color:#a44;font-weight:bold;cursor:pointer;margin:0;");
+			elem.appendChild(document.createTextNode(msg));
+			elem.addEventListener("click",this.hide.bind(this));
+			let key=window.setTimeout(()=>elem.dispatchEvent(new MouseEvent("click")),5000);
+			this.current.push({key,elem});
+			document.body.appendChild(elem);
+		},
+		hide(e){
+			for(let i=0;i<this.current.length;i++){
+				if(e.currentTarget!==this.current[i].elem)continue;
+				window.clearTimeout(this.current[i].key);
+				document.body.removeChild(this.current[i].elem);
+				delete this.current[i];
+				this.current=this.current.filter(Boolean);
+				break;
+			}
+		}
 	},
 	util:{
 		getPages(current){
