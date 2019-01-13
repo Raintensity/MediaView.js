@@ -1,6 +1,6 @@
 /**
  * MediaView.js
- * See {@link https://github.com/Raintensity/MediaView.js} or {@link https://blog.usx.jp/js/mediaview/}.
+ * See {@link https://github.com/Raintensity/MediaView.js} or {@link https://blog.usx.jp/javascript/mediaview/}.
  * @author Raintensity
  * @license MIT-License
  */
